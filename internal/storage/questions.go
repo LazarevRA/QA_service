@@ -7,7 +7,7 @@ import (
 )
 
 // PostQuestion создает новый вопрос
-func (s *Storage) PostQuestion(text string) (*models.Question, error) {
+func (s *Storage) CreateQuestion(text string) (*models.Question, error) {
 	question := &models.Question{
 		Text:      text,
 		CreatedAt: time.Now(),
