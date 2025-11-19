@@ -7,7 +7,7 @@ import (
 )
 
 // CreateAnswer создает ответ на вопрос
-func (s *Storage) CreateAnswer(questionID uint, userID, text string) (*models.Answer, error) {
+func (s *Storage) CreateAnswer(questionID int, userID, text string) (*models.Answer, error) {
 	var question models.Question
 
 	//Проверка существования вопроса
@@ -31,7 +31,7 @@ func (s *Storage) CreateAnswer(questionID uint, userID, text string) (*models.An
 }
 
 // GetAnswer возвращает конкретный ответ по ID
-func (s *Storage) GetAnswer(id uint) (*models.Answer, error) {
+func (s *Storage) GetAnswer(id int) (*models.Answer, error) {
 	var answer models.Answer
 	err := s.DB.First(&answer, id).Error
 	if err != nil {
@@ -41,6 +41,6 @@ func (s *Storage) GetAnswer(id uint) (*models.Answer, error) {
 }
 
 // DeleteAnswer удаляет ответ по ID
-func (s *Storage) DeleteAnswer(id uint) error {
+func (s *Storage) DeleteAnswer(id int) error {
 	return s.DB.Delete(&models.Answer{}, id).Error
 }

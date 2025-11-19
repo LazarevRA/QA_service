@@ -3,8 +3,8 @@ package models
 import "time"
 
 type Answer struct {
-	ID         uint      `gorm:"primaryKey" json:"id"`
-	QuestionID uint      `gorm:"not null" json:"question_id"`
+	ID         int       `gorm:"primaryKey" json:"id"`
+	QuestionID int       `gorm:"not null" json:"question_id"`
 	UserID     string    `gorm:"type:uuid;not null" json:"user_id"`
 	Text       string    `gorm:"type:text;not null" json:"text"`
 	CreatedAt  time.Time `json:"created_at"`

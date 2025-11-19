@@ -29,7 +29,7 @@ func (s *Storage) GetQuestions() ([]models.Question, error) {
 }
 
 // GetQuestion возвращает вопрос по ID и все ответы на него
-func (s *Storage) GetQuestion(id uint) (*models.Question, error) {
+func (s *Storage) GetQuestion(id int) (*models.Question, error) {
 	var question models.Question
 	err := s.DB.Preload("Answers").First(&question, id).Error
 	if err != nil {
@@ -39,6 +39,6 @@ func (s *Storage) GetQuestion(id uint) (*models.Question, error) {
 }
 
 // DeliteQuestion удаляет вопрос и все ответы на него
-func (s *Storage) DeliteQuestion(id uint) error {
+func (s *Storage) DeliteQuestion(id int) error {
 	return s.DB.Delete(&models.Question{}, id).Error
 }
