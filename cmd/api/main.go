@@ -2,7 +2,6 @@ package main
 
 import (
 	"QA-service/internal/config"
-	"QA-service/internal/migration"
 	"QA-service/internal/storage"
 	"log"
 
@@ -15,24 +14,16 @@ func main() {
 	// Загружаем конфигурацию
 	cfg := config.Load()
 
+	dsn := cfg.GetDSN()
+	log.Printf("Attempting to connect with DSN: host=%s, port=%s, dbname=%s, user=%s",
+		cfg.DBHost, cfg.DBPort, cfg.DBName, cfg.DBUser)
+
 	// Инициализируем хранилище
-	storage, err := storage.NewStorage(cfg.GetDSN())
+	storage, err := storage.NewStorage(dsn)
 	if err != nil {
 		log.Fatalf("Failed to initialize storage: %v", err)
 	}
 	defer storage.Close()
-
-	//Миграции
-	sqlDB, err := storage.DB.DB()
-	if err != nil {
-		log.Fatalf("Failed to get sql.DB from gorm.DB: %v", err)
-	}
-	defer sqlDB.Close()
-
-	migrator := migration.NewMigrator(sqlDB)
-	if err := migrator.Run(); err != nil {
-		log.Fatalf("Failed to run migrations: %v", err)
-	}
 
 	// Проверяем подключение к БД
 	if err := storage.HealthCheck(); err != nil {

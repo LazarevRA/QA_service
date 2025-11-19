@@ -30,7 +30,7 @@ func (c *Config) GetDSN() string {
 		" user=" + c.DBUser +
 		" password=" + c.DBPassword +
 		" dbname=" + c.DBName +
-		" port+" + c.DBPort +
+		" port=" + c.DBPort +
 		" sslmode=disable TimeZone=UTC"
 }
 
