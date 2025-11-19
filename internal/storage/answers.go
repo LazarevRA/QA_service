@@ -11,7 +11,7 @@ func (s *Storage) CreateAnswer(questionID uint, userID, text string) (*models.An
 	var question models.Question
 
 	//Проверка существования вопроса
-	err := s.db.First(&question, questionID).Error
+	err := s.DB.First(&question, questionID).Error
 	if err != nil {
 		return nil, fmt.Errorf("question with this ID not found")
 	}
@@ -23,7 +23,7 @@ func (s *Storage) CreateAnswer(questionID uint, userID, text string) (*models.An
 		CreatedAt:  time.Now(),
 	}
 
-	err = s.db.Create(answer).Error
+	err = s.DB.Create(answer).Error
 	if err != nil {
 		return nil, err
 	}
@@ -33,7 +33,7 @@ func (s *Storage) CreateAnswer(questionID uint, userID, text string) (*models.An
 // GetAnswer возвращает конкретный ответ по ID
 func (s *Storage) GetAnswer(id uint) (*models.Answer, error) {
 	var answer models.Answer
-	err := s.db.First(&answer, id).Error
+	err := s.DB.First(&answer, id).Error
 	if err != nil {
 		return nil, err
 	}
@@ -42,5 +42,5 @@ func (s *Storage) GetAnswer(id uint) (*models.Answer, error) {
 
 // DeleteAnswer удаляет ответ по ID
 func (s *Storage) DeleteAnswer(id uint) error {
-	return s.db.Delete(&models.Answer{}, id).Error
+	return s.DB.Delete(&models.Answer{}, id).Error
 }

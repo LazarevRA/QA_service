@@ -13,7 +13,7 @@ func (s *Storage) CreateQuestion(text string) (*models.Question, error) {
 		CreatedAt: time.Now(),
 	}
 
-	err := s.db.Create(question).Error
+	err := s.DB.Create(question).Error
 	if err != nil {
 		return nil, err
 	}
@@ -24,14 +24,14 @@ func (s *Storage) CreateQuestion(text string) (*models.Question, error) {
 // GetQuestions возвращает все вопросы
 func (s *Storage) GetQuestions() ([]models.Question, error) {
 	var questions []models.Question
-	err := s.db.Find(&questions).Error
+	err := s.DB.Find(&questions).Error
 	return questions, err
 }
 
 // GetQuestion возвращает вопрос по ID и все ответы на него
 func (s *Storage) GetQuestion(id uint) (*models.Question, error) {
 	var question models.Question
-	err := s.db.Preload("Answers").First(&question, id).Error
+	err := s.DB.Preload("Answers").First(&question, id).Error
 	if err != nil {
 		return nil, err
 	}
@@ -40,5 +40,5 @@ func (s *Storage) GetQuestion(id uint) (*models.Question, error) {
 
 // DeliteQuestion удаляет вопрос и все ответы на него
 func (s *Storage) DeliteQuestion(id uint) error {
-	return s.db.Delete(&models.Question{}, id).Error
+	return s.DB.Delete(&models.Question{}, id).Error
 }

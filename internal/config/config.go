@@ -11,7 +11,7 @@ type Config struct {
 	ServerPort string
 }
 
-// Создает и возвращает объект Config с подтянутыми туда переменныеми окружения.
+// Создает и возвращает Config с подтянутыми туда переменныеми окружения.
 // Если переменные окружения не были найдены по ключам - использует стандартные.
 func Load() *Config {
 	return &Config{
@@ -19,7 +19,7 @@ func Load() *Config {
 		DBPort:     getEnv("DB_PORT", "5432"),
 		DBUser:     getEnv("DB_USER", "postgres"),
 		DBPassword: getEnv("DB_PASSWORD", "password"),
-		DBName:     getEnv("DB_NAME", "qa_db"),
+		DBName:     getEnv("DB_NAME", "qa_service"),
 		ServerPort: getEnv("SERVER_PORT", "8080"),
 	}
 }

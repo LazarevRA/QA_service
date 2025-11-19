@@ -8,7 +8,7 @@ import (
 )
 
 type Storage struct {
-	db *gorm.DB
+	DB *gorm.DB
 }
 
 // Создает новое подключение к БД
@@ -18,12 +18,12 @@ func NewStorage(dsn string) (*Storage, error) {
 		return nil, fmt.Errorf("failed to connect to DB: %w", err)
 	}
 
-	return &Storage{db: db}, nil
+	return &Storage{DB: db}, nil
 }
 
 // Пинг БД
 func (s *Storage) HealthCheck() error {
-	sqlDB, err := s.db.DB()
+	sqlDB, err := s.DB.DB()
 	if err != nil {
 		return err
 	}
@@ -32,7 +32,7 @@ func (s *Storage) HealthCheck() error {
 
 // Закрывает подключение к БД
 func (s *Storage) Close() error {
-	sqlDB, err := s.db.DB()
+	sqlDB, err := s.DB.DB()
 	if err != nil {
 		return err
 	}
