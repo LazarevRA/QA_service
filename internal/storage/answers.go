@@ -30,7 +30,7 @@ func (s *Storage) CreateAnswer(questionID int, userID, text string) (*models.Ans
 	return answer, nil
 }
 
-// GetAnswer возвращает конкретный ответ по ID
+// GetAnswer возвращает конкретный ответ по его ID
 func (s *Storage) GetAnswer(id int) (*models.Answer, error) {
 	var answer models.Answer
 	err := s.DB.First(&answer, id).Error

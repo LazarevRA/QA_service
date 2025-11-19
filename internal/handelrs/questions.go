@@ -41,7 +41,8 @@ func (qh *QuestionHandler) CreateQuestion(w http.ResponseWriter, r *http.Request
 
 	err := json.NewDecoder(r.Body).Decode(&question)
 	if err != nil {
-		http.Error(w, "failed to decode json", http.StatusBadRequest)
+		log.Println(fmt.Errorf("failed to decode json from question body: %w", err))
+		http.Error(w, "invalid question body", http.StatusBadRequest)
 		return
 	}
 
