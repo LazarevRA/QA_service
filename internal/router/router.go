@@ -28,4 +28,6 @@ func NewRouter(storage *storage.Storage) *chi.Mux {
 		r.Get("/{answerID}", answerHandler.GetAnswer)
 		r.Delete("/{answerID}", answerHandler.DeleteAnswer)
 	})
+
+	return r
 }
