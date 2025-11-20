@@ -32,6 +32,8 @@ func (qh *QuestionHandler) GetQuestions(w http.ResponseWriter, r *http.Request) 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(questions)
 
+	log.Printf("User got %d questions from data base", len(questions))
+
 }
 
 // Хэдлер для создания нового вопроса
@@ -65,6 +67,8 @@ func (qh *QuestionHandler) CreateQuestion(w http.ResponseWriter, r *http.Request
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(createdQuestion)
 
+	log.Printf("New question created; ID = %d text = %s", createdQuestion.ID, createdQuestion.Text)
+
 }
 
 // Хэндлер получения вопроса по ID
@@ -90,6 +94,7 @@ func (qh *QuestionHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(question)
 
+	log.Printf("User got question with ID = %d", questionID)
 }
 
 func (qh *QuestionHandler) DeleteQuestion(w http.ResponseWriter, r *http.Request) {
@@ -111,5 +116,5 @@ func (qh *QuestionHandler) DeleteQuestion(w http.ResponseWriter, r *http.Request
 	}
 
 	w.WriteHeader(http.StatusNoContent)
-
+	log.Printf("Deleted question with ID = %d", questionID)
 }

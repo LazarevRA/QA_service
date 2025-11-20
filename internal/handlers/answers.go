@@ -63,6 +63,8 @@ func (ah *AnswerHandler) CreateAnswer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(createdAnswer)
+
+	log.Printf("New answer created; question ID = %d created answer ID = %d, text = %s", questionID, createdAnswer.ID, createdAnswer.Text)
 }
 
 // Хэндлер для возвращения конкретного ответа по указаному ID ответа
@@ -86,6 +88,9 @@ func (ah *AnswerHandler) GetAnswer(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(answer)
+
+	log.Printf("user got answer = %d, text = %s", answer.ID, answer.Text)
+
 }
 
 // Хэндлер для удаления ответа с указанным ID
@@ -108,4 +113,6 @@ func (ah *AnswerHandler) DeleteAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusNoContent)
+
+	log.Printf("Deleted answer with ID = %d", answerID)
 }

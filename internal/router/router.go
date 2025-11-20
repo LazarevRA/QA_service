@@ -20,7 +20,7 @@ func NewRouter(storage *storage.Storage) *chi.Mux {
 		r.Route("/{questionID}", func(r chi.Router) {
 			r.Get("/", quetionHandler.GetQuestion)
 			r.Delete("/", quetionHandler.DeleteQuestion)
-			r.Post("/answers", answerHandler.CreateAnswer)
+			r.Post("/answers/", answerHandler.CreateAnswer)
 		})
 	})
 

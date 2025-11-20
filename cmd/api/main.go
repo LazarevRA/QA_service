@@ -2,8 +2,10 @@ package main
 
 import (
 	"QA-service/internal/config"
+	"QA-service/internal/router"
 	"QA-service/internal/storage"
 	"log"
+	"net/http"
 
 	_ "github.com/lib/pq"
 )
@@ -32,6 +34,15 @@ func main() {
 
 	log.Println("Successfully connected to database!")
 
+	r := router.NewRouter(storage)
+
+	log.Printf("Server starting on port %s", cfg.ServerPort)
+	log.Fatal(http.ListenAndServe(":"+cfg.ServerPort, r))
+
+	log.Println("Service is ready!")
+}
+
+/*
 	// ТЕСТ: Создаем тестовый вопрос
 	question, err := storage.CreateQuestion("Как работает Go?")
 	if err != nil {
@@ -76,6 +87,4 @@ func main() {
 			}
 		}
 	}
-
-	log.Println("Service is ready!")
-}
+*/
