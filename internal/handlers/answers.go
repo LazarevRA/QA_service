@@ -1,4 +1,4 @@
-package handelrs
+package handlers
 
 import (
 	"QA-service/internal/models"
@@ -9,14 +9,14 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 )
 
 type AnswerHandler struct {
 	storage *storage.Storage
 }
 
-func NewAnswerStorage(storage *storage.Storage) *AnswerHandler {
+func NewAnswerHandler(storage *storage.Storage) *AnswerHandler {
 	return &AnswerHandler{storage: storage}
 }
 

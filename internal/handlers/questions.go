@@ -1,4 +1,4 @@
-package handelrs
+package handlers
 
 import (
 	"QA-service/internal/models"
@@ -9,14 +9,14 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/v5"
 )
 
 type QuestionHandler struct {
 	storage *storage.Storage
 }
 
-func NewQuestionStorage(storage *storage.Storage) *QuestionHandler {
+func NewQuestionHandler(storage *storage.Storage) *QuestionHandler {
 	return &QuestionHandler{storage: storage}
 }
 
@@ -40,6 +40,7 @@ func (qh *QuestionHandler) CreateQuestion(w http.ResponseWriter, r *http.Request
 	var question models.Question
 
 	err := json.NewDecoder(r.Body).Decode(&question)
+
 	if err != nil {
 		log.Println(fmt.Errorf("failed to decode json from question body: %w", err))
 		http.Error(w, "invalid question body", http.StatusBadRequest)
@@ -71,6 +72,7 @@ func (qh *QuestionHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 
 	questionIDStr := chi.URLParam(r, "questionID")
 	questionID, err := strconv.Atoi(questionIDStr)
+
 	if err != nil {
 		log.Println(fmt.Errorf("failed to get id from URL: %w", err))
 		http.Error(w, "invalid question ID", http.StatusBadRequest)
@@ -78,6 +80,7 @@ func (qh *QuestionHandler) GetQuestion(w http.ResponseWriter, r *http.Request) {
 	}
 
 	question, err := qh.storage.GetQuestion(questionID)
+
 	if err != nil {
 		log.Println(fmt.Errorf("failed to get question with ID: %w", err))
 		http.Error(w, "No question with this ID", http.StatusInternalServerError)
@@ -101,6 +104,7 @@ func (qh *QuestionHandler) DeleteQuestion(w http.ResponseWriter, r *http.Request
 	}
 
 	err = qh.storage.DeliteQuestion(questionID)
+
 	if err != nil {
 		log.Println(fmt.Errorf("failed to delite question: %w", err))
 		http.Error(w, "failed to delite question", http.StatusInternalServerError)
