@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"QA-service/internal/models"
-	"QA-service/internal/storage"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -12,11 +11,17 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type AnswerHandler struct {
-	storage *storage.Storage
+type AnswerStorage interface {
+	CreateAnswer(questionID int, userID, text string) (*models.Answer, error)
+	GetAnswer(id int) (*models.Answer, error)
+	DeleteAnswer(id int) error
 }
 
-func NewAnswerHandler(storage *storage.Storage) *AnswerHandler {
+type AnswerHandler struct {
+	storage AnswerStorage
+}
+
+func NewAnswerHandler(storage AnswerStorage) *AnswerHandler {
 	return &AnswerHandler{storage: storage}
 }
 
