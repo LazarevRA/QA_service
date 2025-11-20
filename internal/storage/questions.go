@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// PostQuestion создает новый вопрос
+// CreateQuestion создает новый вопрос
 func (s *Storage) CreateQuestion(text string) (*models.Question, error) {
 	question := &models.Question{
 		Text:      text,
@@ -39,6 +39,6 @@ func (s *Storage) GetQuestion(id int) (*models.Question, error) {
 }
 
 // DeliteQuestion удаляет вопрос и все ответы на него
-func (s *Storage) DeliteQuestion(id int) error {
+func (s *Storage) DeleteQuestion(id int) error {
 	return s.DB.Delete(&models.Question{}, id).Error
 }

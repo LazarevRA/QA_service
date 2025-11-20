@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"QA-service/internal/models"
-	"QA-service/internal/storage"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -12,11 +11,18 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type QuestionHandler struct {
-	storage *storage.Storage
+type QuestionStorage interface {
+	GetQuestions() ([]models.Question, error)
+	CreateQuestion(text string) (*models.Question, error)
+	GetQuestion(id int) (*models.Question, error)
+	DeleteQuestion(id int) error
 }
 
-func NewQuestionHandler(storage *storage.Storage) *QuestionHandler {
+type QuestionHandler struct {
+	storage QuestionStorage
+}
+
+func NewQuestionHandler(storage QuestionStorage) *QuestionHandler {
 	return &QuestionHandler{storage: storage}
 }
 
@@ -108,11 +114,11 @@ func (qh *QuestionHandler) DeleteQuestion(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	err = qh.storage.DeliteQuestion(questionID)
+	err = qh.storage.DeleteQuestion(questionID)
 
 	if err != nil {
-		log.Println(fmt.Errorf("failed to delite question: %w", err))
-		http.Error(w, "failed to delite question", http.StatusInternalServerError)
+		log.Println(fmt.Errorf("failed to delete question: %w", err))
+		http.Error(w, "failed to delete question", http.StatusInternalServerError)
 	}
 
 	w.WriteHeader(http.StatusNoContent)
