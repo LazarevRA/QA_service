@@ -1,0 +1,54 @@
+# ==========================================
+# Go build artifacts
+# ==========================================
+/bin/
+/build/
+/dist/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# IDE/Editor files
+# ==========================================
+.vscode/
+.idea/
+*.iml
+
+# Logs
+# ==========================================
+*.log
+logs/
+
+# Environment & secrets
+# ==========================================
+.env
+.env.local
+.env.*.local
+
+# Docker garbage
+# ==========================================
+docker-compose.override.yml
+*.pid
+*~
+
+
+# OS junk
+# ==========================================
+.DS_Store
+Thumbs.db
+
+# Cache
+# ==========================================
+/.cache/
+/tmp/
+*.swp
+*.swo
+
+# Go workspaces
+# ==========================================
+go.work
+go.work.sum

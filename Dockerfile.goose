@@ -6,4 +6,4 @@ COPY migrations /migrations
 
 WORKDIR /migrations
 
-CMD ["goose", "-version"]
+CMD ["goose", "up"]

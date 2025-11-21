@@ -16,16 +16,17 @@ build:
 	docker build -t qa-service-migrations -f Dockerfile.goose .
 
 migrate-up:
-	docker compose run --rm migrations goose -dir /migrations postgres ${GOOSE_DBSTRING} up
+	docker compose run --rm migrations goose up
 	@echo "migrations rolled successfully"
 
 
 migrate-down:
-	docker compose run --rm migrations goose -dir /migrations postgres ${GOOSE_DBSTRING} down
+	docker compose run --rm migrations goose down
 	@echo "migrations rolled-back successfully"
 
 migrate-status:
-	docker compose run --rm migrations goose -dir /migrations postgres ${GOOSE_DBSTRING} status
-	
+	docker compose run --rm migrations goose status
+	@echo "migrations status given successfully"
+
 service-start: build db-up migrate-up app-up
 	@echo "qa_service started on /localhost:8080"

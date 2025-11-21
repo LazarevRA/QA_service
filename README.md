@@ -23,8 +23,10 @@
 
     1) скопируйте репозиторий
         git clone https://github.com/LazarevRA/QA_service.git
+    
+    2) Переименовать .env.example в .env
 
-    2) Для быстрого запуска используется команда make service-start
+    3) Для быстрого запуска используется команда make service-start
 
 Make команды:
 
@@ -72,14 +74,14 @@ Make команды:
     
     Конфиг находится в /internal/config
 
-При отсутствии make можно запустить сервис следующим способом:
+При отсутствии make можно запустить сервис с использованием только docker compose:
    
     1) docker compose up -d db
-    2) goose -dir migrations postgres "host=localhost user=postgres password=password dbname=qa_service port=5432 sslmode=disable" up
+    2) docker compose run --rm migrations goose up
     3) docker compose up -d app
 
     Остановка всех сервисов:
         docker compose down
     
-    Откат миграций 
-        docker compose run --rm migrations goose -dir /migrations postgres "host=db user=postgres password=password dbname=qa_service port=5432 sslmode=disable" down
+    Откат последней миграции 
+        docker compose run --rm migrations goose down
