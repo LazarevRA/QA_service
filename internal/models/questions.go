@@ -1,0 +1,13 @@
+package models
+
+import (
+	"time"
+)
+
+//Модель вопроса
+type Question struct {
+	ID        int       `gorm:"primaryKey" json:"id"`
+	Text      string    `gorm:"type:text;not null" json:"text"`
+	CreatedAt time.Time `json:"created_at"`
+	Answers   []Answer  `gorm:"foreignKey:QuestionID" json:"answers,omitempty"`
+}
