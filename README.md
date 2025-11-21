@@ -22,7 +22,7 @@
 Запуск приложения:
 
     1) скопируйте репозиторий
-        git clone https://github.com/LazarevRA/hitalent_test.git
+        git clone https://github.com/LazarevRA/QA_service.git
 
     2) Для быстрого запуска используется команда make service-start
 
