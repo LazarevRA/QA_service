@@ -46,6 +46,7 @@ Make команды:
         make migrate-status //Посмотреть статус миграций
 
 Методы API:
+
     Вопросы (Questions):
         GET /questions/ — список всех вопросов
         POST /questions/ — создать новый вопрос
