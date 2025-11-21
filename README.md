@@ -74,7 +74,7 @@ Make команды:
 
 При отсутствии make можно запустить сервис следующим способом:
    
-    1) docker-compose up -d db
+    1) docker compose up -d db
     2) goose -dir migrations postgres "host=localhost user=postgres password=password dbname=qa_service port=5432 sslmode=disable" up
     3) docker compose up -d app
 
