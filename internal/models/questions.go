@@ -4,6 +4,7 @@ import (
 	"time"
 )
 
+//Модель вопроса
 type Question struct {
 	ID        int       `gorm:"primaryKey" json:"id"`
 	Text      string    `gorm:"type:text;not null" json:"text"`

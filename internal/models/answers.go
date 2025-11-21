@@ -2,6 +2,7 @@ package models
 
 import "time"
 
+//Модель ответа
 type Answer struct {
 	ID         int       `gorm:"primaryKey" json:"id"`
 	QuestionID int       `gorm:"not null" json:"question_id"`
