@@ -45,6 +45,19 @@ Make команды:
         make migrate-down   //Откатить последнюю миграцию
         make migrate-status //Посмотреть статус миграций
 
+Методы API:
+    Вопросы (Questions):
+        GET /questions/ — список всех вопросов
+        POST /questions/ — создать новый вопрос
+        GET /questions/{id} — получить вопрос и все ответы на него
+        DELETE /questions/{id} — удалить вопрос (вместе с ответами)
+
+
+    Ответы (Answers):
+        POST /questions/{id}/answers/ — добавить ответ к вопросу
+        GET /answers/{id} — получить конкретный ответ
+        DELETE /answers/{id} — удалить ответ
+        
 Доступ:
 
     Приложение работает на порту 8080: http://localhost:8080
